@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JavaScript Assignment</title>
+	<link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+	<script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<style>
+	section {
+		margin: 2em;
+	}
+	form {
+		margin: 2em;
+	}
+</style>
+</head>
+<body>
+	<section class="card">
+		<div class="card-header d-flex flex-row">
+			<h4 class="col">Issues Summary</h4>
+			<button type="button" class="btn btn-primary">Open</button>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th></th>
+					<th>total</th>
+					<th>open</th>
+					<th>my_issues</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>sagar.patke/bootstrap-assignment</th>
+					<td>5</td>
+					<td>2</td>
+					<td>2</td>
+				</tr>
+				<tr>
+					<th>sagar.patke/javascript-assignment</th>
+					<td>6</td>
+					<td>3</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<th>sagar.patke/angular-assignment</th>
+					<td>4</td>
+					<td>1</td>
+					<td>0</td>
+				</tr>
+				<tr>
+					<th>sagar.patke/java-assignment</th>
+					<td>7</td>
+					<td>4</td>
+					<td>3</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	<section class="card">
+		<h4 class="card-header">Explore</h4>
+		<form onsubmit="handleFormSubmit(event);">
+			<div class="form-group">
+				<label for="countQueryRepositoryInput">Repository</label>
+				<input type="text" class="form-control" id="countQueryRepositoryInput" placeholder="Type repository name here">
+			</div>
+			<div class="form-group">
+				<label for="countQueryIssueType">Count</label>
+				<input type="text" class="form-control" id="countQueryIssueType" placeholder="Type count type (total / open / my_issues)">
+			</div>
+			<input type="submit" value="Go!" class="btn btn-primary">
+			<span id="count"></span>
+		</form>
+	</section>
+	<script>
+		function handleFormSubmit(event) {
+			// Prevent the page for re-loading
+			event.preventDefault();
+			// Retrieve repositoryName and issueType from User Input
+			const repositoryName = document.getElementById('countQueryRepositoryInput').value;
+			const issueType = document.getElementById('countQueryIssueType').value;
+			// Select Row of the repository
+			const repositoryRowCollection = document.getElementsByTagName('tr');
+			const repositoryRowArray = Array.from(repositoryRowCollection);
+			const row = repositoryRowArray.filter(function (tr) {
+				return tr.getElementsByTagName('th')[0].innerText === repositoryName;
+			})[0];
+			// Find Count Index
+			const theadRow = document.getElementsByTagName('thead')[0].getElementsByTagName('tr')[0];
+			thArray = Array.from(theadRow.getElementsByTagName('th'));
+			const th = thArray.filter(function(th) {
+				return th.innerText === issueType;
+			})[0];
+			const countIndex = thArray.indexOf(th);
+			const count = row.getElementsByTagName('td')[countIndex-1].innerText;
+			// Set the count in HTML
+			document.getElementById('count').innerHTML = `<strong>${count}</strong>`;
+		}
+// function to get Repositories
+		function getRepositories(cb) {
+		/* 	const httpRequest = new XMLHttpRequest();
+			httpRequest.open('GET', 'https://gitlab-cts.stackroute.in/api/v3/projects');
+			httpRequest.setRequestHeader('PRIVATE-TOKEN', 'o1-Tn-SfCEeB3cFSdJVX');
+			httpRequest.onreadystatechange = ()=>{
+				if (httpRequest.readyState === XMLHttpRequest.DONE) {
+					console.log(httpRequest.readyState);
+					cb(null, JSON.parse(httpRequest.response));
+					// invoking the callback function
+				}
+			}
+			httpRequest.send(); */
+			fetch('https://gitlab-cts.stackroute.in/api/v3/projects',{
+				headers: {
+					//'PRIVATE-TOKEN' : 'o1-Tn-SfCEeB3cFSdJVX'
+                   'PRIVATE-TOKEN' : 'XRstYivu_QnZyWUVRWVy'
+				}
+			})
+			.then(response => response.json())
+			.then((data) => {cb(null,data)})
+			.catch((err) => { throw new Error(err)});
+		}
+// function to get issues for a specified repository
+		function getIssues(repositoryid,cb) {
+				const httpRequest = new XMLHttpRequest();
+				httpRequest.open('GET', `https://gitlab-cts.stackroute.in/api/v3/projects/${repositoryid}/issues`);
+				httpRequest.setRequestHeader('PRIVATE-TOKEN', 'o1-Tn-SfCEeB3cFSdJVX');
+				httpRequest.onreadystatechange = ()=>{
+					if (httpRequest.readyState === XMLHttpRequest.DONE) {
+						console.log(httpRequest.readyState);
+						cb(null, JSON.parse(httpRequest.response));
+						// invoking the callback function
+					}
+				}
+				httpRequest.send();
+			}
+	
+	
+	// calling getRepositories function to all repos of your gitlab account
+	getRepositories((err,repositories)=>{
+		// to update the repos with issues we have to get hold of table body element
+		const tbody = document.getElementsByTagName('tbody')[0];
+		let tbodyInnerHtml = ''; // to replace the previous content with new content
+		repositories.forEach((repository) =>{
+			//calling getIssues for each repo
+			getIssues(repository.id,(err,issues) =>{
+				let countsInitial = {
+					total : 0,
+					my_issues: 0
+				};
+					// to calculate total issues and my_issues
+					const counts=issues.reduce((accumulator, issue) =>{
+						accumulator.total +=1;  
+						accumulator.my_issues += issue.author.name ==='jayaprasad' ? 1: 0;
+						return accumulator;
+					},countsInitial);
+				const trInnerHtml = `
+					<th>${repository.path_with_namespace}</th>
+					<td>${counts.total}</td>
+					<td>${repository.open_issues_count}</td>
+					<td>${counts.my_issues}</td>
+					`
+					const tr = document.createElement('tr');
+					tr.innerHTML = trInnerHtml;
+					tbody.appendChild(tr);
+			})
+		})//end of for each
+		tbody.innerHTML = tbodyInnerHtml;
+	});
+	</script>
+</body>
+</html>
