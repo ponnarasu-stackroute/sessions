@@ -1,0 +1,20 @@
+<form (submit)='registerForm(frm.value)' #frm="ngForm">
+<div class="divcls">
+<label for="username">UserName</label>
+<input type="text" name="username" id="username" placeholder="Enter UserName" ngModel #name="ngModel" required>
+<small *ngIf="(name.touched || name.dirty) && name.invalid">This is a mandatory field</small>
+</div>
+<div class="divcls">
+<label for="password">password</label>
+<input type="password" name="password" id="password" placeholder="Enter Password" ngModel #password="ngModel" required minlength="6">
+<small *ngIf="(password.touched || password.dirty) && password.invalid && password.errors.required"> This is a mandatory field</small>
+<small *ngIf="(password.touched || password.dirty) && password.invalid && password.errors.minlength" > {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters to go..</small>
+
+</div>
+<div class="divcls">
+<button type="submit" [disabled]='frm.invalid'>Submit</button>
+<p>Password status : {{password.control.errors | json}}</p>
+
+</div>
+
+</form>

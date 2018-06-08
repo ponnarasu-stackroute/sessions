@@ -1,0 +1,16 @@
+{
+  "name": "Server",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "autoprefixer": "7.1.1",
+    "json-server": "^0.10.3",
+    "jsonwebtoken": "^7.4.1",
+    "object-assign": "4.1.1",
+    "promise": "7.1.1"
+  },
+  "scripts": {
+    "serve": "node scripts/start.js",
+    "start": "node bin/www"
+  }
+}
