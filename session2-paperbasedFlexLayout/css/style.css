@@ -1,0 +1,38 @@
+body{
+    background-color: #DDD;
+}
+.papers{
+    background-color: white;
+    padding: 2em;
+    box-shadow: 20px 20px 20px grey;
+   }
+   .container{
+       display: flex;
+       flex-direction: column;
+       height: 100vh;
+       
+   }
+   .container > section{
+       flex-grow: 1;
+       padding: 1em;
+       overflow: auto;
+   }
+ 
+   
+   header.papers{
+       background-color: #a03A52;
+   }
+   nav.papers{
+       background-color: #FE5E41;
+   }
+   footer.papers{
+       background-color: #EBA6A9;
+   }
+   .flex-row{
+       display: flex; /* this overrides line # 13.. getting back to default row layout */
+       justify-content: space-between;
+   }
+   .flex-row section{
+       flex-grow: 1;
+       padding: 1em;
+   }

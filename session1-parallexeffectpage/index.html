@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Profile Page</title>
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Lobster" rel="stylesheet">
+   <style>
+       html, body, .section-1,.section-2,.section-3 {
+           height: 100%;
+           width: 100%;
+       }
+       .section-1{
+           text-align: center;
+           padding-top: 5em;
+           background-image:url('./images/img1.jpg');
+       }
+       header{
+           background-color: teal;
+           padding: 1em;
+           font-family: 'Abril Fatface', cursive; /*  to use google font*/
+       }
+       body{
+           margin: 0;
+       }
+       .section-1 a {
+           border: 2px solid blue;
+           padding: 1em;
+           display: block; /* to convert inline element to block element */
+           /*margin-top: 1em; */
+           margin:auto;
+           width:10em;
+           border-radius: 10px;
+           background-color: #DDD;
+       }
+       .section-1 img {
+           height: 100px;
+           width: 100px;
+           border-radius: 50px;
+       }
+       .section-1 p{
+        font-family: 'Lobster', cursive;
+       }
+       .section-2{
+           background-image: url('./images/img2.png');
+           background-attachment: fixed;
+           
+       }
+       .section-3{
+           background-image: url('./images/img3.jpg');
+       }
+      
+   </style>
+</head>
+<body>
+    <header>
+        <h1>StackRoute Mentors</h1>
+    </header>
+    <section class="section-1">
+        <h2>Mentor's Profile Page</h2>
+        <img src="./images/jp.png" alt="Profile Picture">
+        <p> I am a Product Engineer at StackRoute</p>
+        <a href="https://www.linkedin.com/in/jayaprasad-k-4331b019/">Linked in Profile</a>
+    </section>
+    <section class="section-2"></section>
+    <section class="section-3"></section>
+  
+</body>
+</html>
+<!-- 
+    Semantic elements - have special meaning like header, footer, section, article etc
+    Block elements -  these take up full width on a web page . eg : p , h1, h2..., div, li, ol, form
+    inline elements - those who take up as much width as needed to display the content like span, image, a
+    what is the difference between px and em ?
+    px -> when i want fixed size irrespective of device display area.. use px
+    em -> relative to the font size of the viewport
+    % -> relative to the viewport display area
+    what is the difference between padding and margin?
+    padding is with space alloted within the element container. 
+    margin is the space between elements
+ -->

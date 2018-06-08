@@ -1,0 +1,84 @@
+/*mask to an image is used here. using opacity.
+3 div elements are overlapped because of the use of absolute display property
+*/
+body{
+    border:1px solid red;
+    margin: 0;
+}
+.hero-unit{
+    /* setting the size for hero unit */
+    height: 70vh;
+    width: 100vw;
+    
+ 
+}
+.hero-unit-image{
+    position: absolute;
+    
+}
+.hero-unit-image img{
+    /* to fit large image in propersize */
+    height: 70vh;
+    width: 100vw;
+    
+}
+.hero-unit-caption{
+     border:1px solid red;
+    position: absolute;
+    color: whitesmoke;
+    font-size: 5em;
+    
+}
+.hero-unit-caption-container{
+    border:1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.hero-unit-mask{
+     border:1px solid green;
+    background-color: black;
+    height: 70vh;
+    width: 100vw;
+    position: absolute;
+    opacity: 0.5;
+}
+footer{
+     border:1px solid red;
+    background-color: navy;
+    color: white;
+    padding: 1.5em;
+    text-align: center;
+}
+header{
+     border:1px solid red;
+ background-color: navy;
+ color: whitesmoke;
+ display: flex;
+ justify-content: space-between;
+ padding: 1em;
+}
+nav{
+     border:1px solid red;
+    display: flex;
+}
+nav div {
+    margin: 2em;
+     border:1px solid red;
+}
+nav div  a{
+    color: white;
+    text-decoration: none;
+}
+.logo-container{
+    display: flex;
+    align-items: center;
+     border:1px solid red;
+}
+.logo-container img{
+    height: 40px;
+    width: 40px;
+    margin-right: 1em;
+    border-radius: 20px;
+}

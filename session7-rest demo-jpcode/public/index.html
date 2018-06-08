@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <h1>Welcome to  Contacts App</h1> 
+   <form id="newContact" onsubmit="handleSubmit(event);">
+        <input type="text" id="firstName" />
+        <input type="text" id="lastName" />
+        <input type="submit" />
+   </form>
+    <div id="contactInfo"></div>
+   <script>
+       const contacts = null;  // this is to store all contacts through GET
+       function getAllContacts(){
+                const httpRequest = new XMLHttpRequest();
+                httpRequest.open('GET','http://localhost:3000/contacts');
+                httpRequest.setRequestHeader('Content-Type','application/json');
+
+                httpRequest.onreadystatechange = function(){
+                    if(httpRequest.readyState ===  4){
+                        console.log(httpRequest.status);
+                        const contacts = JSON.parse(httpRequest.responseText);
+                        let ul="";
+                        contacts.forEach(function(item){
+                            ul = ul + `<li> ${item.firstname} </li>`
+                        });
+                        document.getElementById('contactInfo').innerHTML = `<ul> ${ul} </ul>`;
+                    }
+                }
+                httpRequest.send();
+
+       }
+
+       getAllContacts();
+
+       function handleSubmit(event){
+           event.preventDefault();
+
+           const contact = {
+               firstname : document.getElementById('firstName').value,
+               lastname : document.getElementById('lastName').value
+           } // extracting details entered in text boxes
+                
+                const httpRequest = new XMLHttpRequest();
+                httpRequest.open('POST','http://localhost:3000/contacts');
+                httpRequest.setRequestHeader('Content-Type','application/json');
+
+                httpRequest.onreadystatechange = function(){
+                    if(httpRequest.readyState === 4){
+                        getAllContacts();
+                    }
+                }
+                httpRequest.send(JSON.stringify(contact));
+
+       }
+   </script>
+</body>
+</html>

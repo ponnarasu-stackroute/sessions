@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bootstrap - Column Drop Layout</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    body {
+      margin: 0;
+    }
+  .c1, .c2, .c3 {
+    height: 100vh;
+  }
+  .c1 {
+      background-color: rgb(28, 69, 135);
+    }
+    .c2 {
+      background-color: rgb(60, 120,216);
+    }
+    .c3 {
+      background-color: rgb(201, 218, 248);
+    }</style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <section class="c1 col-12 col-sm-8 order-sm-2 col-md-8"></section>
+      <section class="c2 col-12 col-sm-4 order-sm-1 col-md-2"></section>
+      <section class="c3 col-12 col-sm-12 order-sm-3 col-md-2"></section>
+    </div>
+  </div>
+</body>
+</html>
