@@ -1,0 +1,12 @@
+.login-c-form-wrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.divcls{
+    margin: 0.5em;
+}

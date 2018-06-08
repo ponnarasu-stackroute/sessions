@@ -1,0 +1,12 @@
+.keep-comp-note-taker-panel{
+    width: 50vw;
+    margin: auto;
+}
+.keep-comp-note-taker-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.keep-comp-button{
+    display: flex;
+    justify-content: flex-end;
+}

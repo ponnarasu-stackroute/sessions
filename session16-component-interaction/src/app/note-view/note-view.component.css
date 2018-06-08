@@ -1,0 +1,10 @@
+.keep-note-view{
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.keep-c-note{
+    margin-left: 10px;
+    margin-top: 10px;
+}
