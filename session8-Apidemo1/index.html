@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JavaScript Assignment</title>
+	<link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+	<script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<style>
+	section {
+		margin: 2em;
+	}
+
+	form {
+		margin: 2em;
+	}
+</style>
+</head>
+<body>
+	<section class="card">
+		<div class="card-header d-flex flex-row">
+			<h4 class="col">Issues Summary</h4>
+			<button type="button" class="btn btn-primary">Open</button>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th></th>
+					<th>total</th>
+					<th>open</th>
+					<th>my_issues</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>sagar.patke/bootstrap-assignment</th>
+					<td>5</td>
+					<td>2</td>
+					<td>2</td>
+				</tr>
+				<tr>
+					<th>sagar.patke/javascript-assignment</th>
+					<td>6</td>
+					<td>3</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<th>sagar.patke/angular-assignment</th>
+					<td>4</td>
+					<td>1</td>
+					<td>0</td>
+				</tr>
+				<tr>
+					<th>sagar.patke/java-assignment</th>
+					<td>7</td>
+					<td>4</td>
+					<td>3</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	<section class="card">
+		<h4 class="card-header">Explore</h4>
+		<form onsubmit="handleFormSubmit(event);">
+			<div class="form-group">
+				<label for="countQueryRepositoryInput">Repository</label>
+				<input type="text" class="form-control" id="countQueryRepositoryInput" placeholder="Type repository name here">
+			</div>
+			<div class="form-group">
+				<label for="countQueryIssueType">Count</label>
+				<input type="text" class="form-control" id="countQueryIssueType" placeholder="Type count type (total / open / my_issues)">
+			</div>
+			<input type="submit" value="Go!" class="btn btn-primary">
+			<span id="count"></span>
+		</form>
+	</section>
+
+	<script>
+
+
+		function handleFormSubmit(event) {
+			// Prevent the page for re-loading
+			event.preventDefault();
+
+			// Retrieve repositoryName and issueType from User Input
+			const repositoryName = document.getElementById('countQueryRepositoryInput').value;
+			const issueType = document.getElementById('countQueryIssueType').value;
+
+
+			// Select Row of the repository
+			const repositoryRowCollection = document.getElementsByTagName('tr');
+			const repositoryRowArray = Array.from(repositoryRowCollection);
+
+			const row = repositoryRowArray.filter(function (tr) {
+				return tr.getElementsByTagName('th')[0].innerText === repositoryName;
+			})[0];
+
+
+			// Find Count Index
+			const theadRow = document.getElementsByTagName('thead')[0].getElementsByTagName('tr')[0];
+
+			thArray = Array.from(theadRow.getElementsByTagName('th'));
+
+			const th = thArray.filter(function(th) {
+				return th.innerText === issueType;
+			})[0];
+
+			const countIndex = thArray.indexOf(th);
+
+			const count = row.getElementsByTagName('td')[countIndex-1].innerText;
+
+			// Set the count in HTML
+			document.getElementById('count').innerHTML = `<strong>${count}</strong>`;
+		}
+
+
+
+		function getIssues(repositoryid,cb) {
+				const httpRequest = new XMLHttpRequest();
+				httpRequest.open('GET', `https://gitlab-cts.stackroute.in/api/v3/projects/${repositoryid}/issues`);
+				httpRequest.setRequestHeader('PRIVATE-TOKEN', 'o1-Tn-SfCEeB3cFSdJVX');
+
+				httpRequest.onreadystatechange = ()=>{
+					if (httpRequest.readyState === XMLHttpRequest.DONE) {
+						console.log(httpRequest.readyState);
+						cb(null, JSON.parse(httpRequest.response));
+						// invoking the callback function
+					}
+
+				}
+
+				httpRequest.send();
+
+			}
+
+
+
+	
+	
+	
+	getRepositories((err,repositories)=>{
+
+		const tbody = document.getElementsByTagName('tbody')[0];
+
+		const repository = repositories[0];
+
+		tbody.innerHTML = `
+		<tr>
+		<th> ${repository.path_with_namespace} </th>
+		<td>0</td>
+		<td>${repository.open_issues_count} </td>
+		<td>0</td>
+		 </tr>
+		`
+	});
+
+	</script>
+
+</body>
+</html>
