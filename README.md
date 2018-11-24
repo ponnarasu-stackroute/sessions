@@ -4,9 +4,9 @@ cntrl+sht+P => for running commands in vs code
 vw/vh - takes full view port at any point of time
 % - it depends on parent container. if a div has 100% then subsequent div or other elements can have 1-100%
 
-#### proxy settings from cognizant
-npm config set proxy http://proxy.cognizant.com:6050
-npm config set https-proxy http://proxy.cognizant.com:6050
+#### proxy settings from organisation
+npm config set proxy http://xxxxxxproxy xx:6050
+npm config set https-proxy http://xxxproxyxxx:6050
 npm config set strict-ssl false   
 npm config set registry http://registry.npmjs.org/
 
@@ -21,9 +21,9 @@ go to the folder and start the httpserver. it picks the index.html automatically
 D:\JSworkspace\session2-paperbasedFlexLayout> http-server 
 Starting up http-server, serving ./
 Available on:
-  http://10.232.43.80:8080
+  http://10.xxx.xx.80:8080
   http://127.0.0.1:8080
-Hit CTRL-C to stop the server
+Hi CTRL-C to stop the server
 ```
 ### inline vs block element
 >**inline element** - takes required space eg: a tag, span, img,
@@ -63,7 +63,7 @@ Note: Flexbox layout is most appropriate to the components of an application, an
 (https://css-tricks.com/snippets/css/a-guide-to-flexbox/) - veru useful link for css
 for check the frontend code - [code pen frontend editor online](https://codepen.io/pen) online workspace using your usual usermail/password. pon*****.mc*****@gmail.com/v******
 demo url for today:
-(https://gitlab-cts.stackroute.in/K/paperbasedFlexLayout-slot2.git)
+
 
 
 # session 2 - 4/4/2017
@@ -369,7 +369,7 @@ console.log(httpRequest.status);
 # session8 - API demo
 fork the demo project and its project is -
 we are consuming api to this project
-https://gitlab-cts.stackroute.in/Ponnarasu.Mahalingam/GitlabAPIDemo-Start.git
+
 ```
 clone this project.
 > npm install
@@ -379,13 +379,13 @@ We are going to fetch git repository API to this project
 ```
 
 sample API provided by gitlab itself- This is to fetch all the repositories in my account.
-step1: go to this link - (https://gitlab-cts.stackroute.in/help) 
-it gives documentation for the access.
+step1: go to this link - (https://gitxxxxxxx
+ documentation for the access.
 step 2: create a private token for you. settings -> user setting -> option to create access token
 step 3: try with curl or postman
 ```
  curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab-cts.stackroute.in/api/v3/projects"
- GET https://gitlab-cts.stackroute.in/api/v3/projects
+ GET https://gitxxxxin/api/v3/projects
  headers: private-token: XRstYivu_QnZyWUVRWVy
 ```
 ### to get api data in a project - 
