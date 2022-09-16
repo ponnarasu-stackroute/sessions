@@ -10,7 +10,7 @@
   "author": "ponnarasum",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.1.0",
+    "bootstrap": "^4.3.1",
     "express": "^4.16.3"
   }
 }
